@@ -1,0 +1,86 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  height: 72px;
+
+  /* UI kit */
+  background: var(--inputs);
+  border-bottom: 1px solid var(--badges);
+}
+
+.inner {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo block */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--main);
+  white-space: nowrap;
+}
+
+/* Menu */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* макет */
+}
+
+/* Links */
+.link {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--main);
+  white-space: nowrap;
+}
+
+.active {
+  color: var(--accent-hover);
+}
+
+/* ====== ADAPTIVE ====== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .nav {
+    gap: 20px;
+  }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  .inner {
+    gap: 12px;
+  }
+
+  .nav {
+    gap: 10px;
+    flex-wrap: wrap; /* щоб не розпирало */
+    justify-content: flex-end;
+  }
+
+  .link {
+    padding: 8px 12px; /* зручна зона кліку */
+    border-radius: 100px;
+    background: var(--badges);
+  }
+
+  .active {
+    background: rgba(228, 72, 72, 0.12);
+    color: var(--accent-hover);
+  }
+}

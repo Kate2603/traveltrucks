@@ -1,0 +1,90 @@
+.box {
+  border: 1px solid var(--border);
+  background: rgba(17, 24, 39, 0.6);
+  border-radius: 18px;
+  padding: 16px;
+}
+.h3 {
+  margin: 0 0 12px;
+}
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--muted);
+}
+.input {
+  border: 1px solid var(--border);
+  background: rgba(11, 18, 32, 0.55);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  outline: none;
+}
+.group {
+  margin-top: 14px;
+}
+.groupTitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 1px solid var(--border);
+  background: rgba(11, 18, 32, 0.45);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.chipActive {
+  border-color: rgba(249, 115, 22, 0.35);
+  background: rgba(249, 115, 22, 0.18);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.check {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--text);
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.primary {
+  flex: 1;
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+  background: var(--accent);
+  color: #111827;
+}
+.secondary {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(11, 18, 32, 0.45);
+  color: var(--text);
+  cursor: pointer;
+}
+.hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}

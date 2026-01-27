@@ -1,0 +1,98 @@
+:root {
+  /* ===== UI KIT COLORS ===== */
+  --white: #ffffff;
+
+  /* Main text colors */
+  --main: #101828; /* Main */
+  --text: #475467; /* Text */
+  --gray: #6c717b; /* Gray */
+  --gray-light: #dadde1; /* Gray light */
+
+  /* Surfaces */
+  --inputs: #f7f7f7; /* Inputs */
+  --badges: #f2f4f7; /* Badges */
+
+  /* Accent (buttons) */
+  --accent: #e44848; /* Button */
+  --accent-hover: #d84343; /* Button Hover */
+
+  /* Rating */
+  --rating: #ffc531;
+
+  /* ===== SIZING / RADIUS ===== */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-pill: 100px;
+  --radius-round: 200px;
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-main:
+    Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* ===== LAYOUT ===== */
+  --container: 1440px;
+
+  /* Responsive gutters */
+  --gutter: 64px;
+}
+
+/* Base reset */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: var(--white);
+  color: var(--main);
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Form controls inherit font */
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+/* Container (макет: 1440px + паддінги) */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  width: 100%;
+}
+
+/* Divider (як у макеті header border / light lines) */
+.hr {
+  height: 1px;
+  background: var(--badges);
+  border: 0;
+  margin: 16px 0;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  :root {
+    --gutter: 20px;
+  }
+}

@@ -1,0 +1,14 @@
+.stars {
+  display: inline-flex;
+  gap: 4px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.on {
+  color: #ffc531;
+}
+
+.off {
+  color: #dadde1;
+}

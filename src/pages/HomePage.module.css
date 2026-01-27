@@ -1,0 +1,150 @@
+.page {
+  position: relative;
+  background: var(--white);
+}
+
+/* Hero image wrapper: макет 1440×696, по центру */
+.hero {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  height: 696px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Background picture with dark overlay 0.2 */
+.picture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../assets/kevin-schmid-Mta8r0bxhbo-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Title block: left 64, top 260, width 571, gap 40 */
+.titleBlock {
+  position: absolute;
+  left: 64px;
+  top: 260px;
+  width: 571px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  z-index: 1;
+}
+
+/* Text group: gap 16 */
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.h1 {
+  margin: 0;
+  font-family: var(--font);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 32px; /* строго по макету */
+  color: var(--inputs);
+}
+
+.h2 {
+  margin: 0;
+  font-family: var(--font);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--inputs);
+}
+
+/* Button: 16px 60px, height 56, radius 200, bg #E44848 */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 56px;
+  padding: 16px 60px;
+  border-radius: 200px;
+
+  background: var(--accent);
+  color: var(--white);
+  text-decoration: none;
+
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+  background: var(--accent-hover);
+}
+
+.cta:active {
+  transform: translateY(1px);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .hero {
+    height: 520px;
+  }
+
+  .titleBlock {
+    left: 20px;
+    right: 20px;
+    top: 180px;
+    width: auto;
+  }
+
+  .h1 {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .h2 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  .hero {
+    height: 460px;
+  }
+
+  .titleBlock {
+    top: 150px;
+  }
+
+  .cta {
+    width: 100%;
+    max-width: 240px;
+    padding: 16px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta {
+    transition: none;
+  }
+}

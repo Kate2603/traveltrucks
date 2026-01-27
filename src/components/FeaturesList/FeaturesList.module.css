@@ -1,0 +1,28 @@
+.wrap {
+  display: grid;
+  gap: 12px;
+}
+.block {
+  border: 1px solid var(--border);
+  background: rgba(17, 24, 39, 0.55);
+  border-radius: 18px;
+  padding: 14px;
+}
+.h4 {
+  margin: 0 0 10px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  border: 1px solid var(--border);
+  background: rgba(11, 18, 32, 0.45);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.muted {
+  color: var(--muted);
+}

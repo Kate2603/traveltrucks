@@ -1,0 +1,335 @@
+.page {
+  max-width: 1312px;
+  margin: 0 auto;
+  padding: 24px 64px 60px;
+  background: #ffffff;
+  color: #101828;
+}
+
+/* Back link */
+.back {
+  margin-bottom: 18px;
+}
+
+.backLink {
+  color: #475467;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+/* Error */
+.error {
+  border: 1px solid rgba(228, 72, 72, 0.35);
+  background: rgba(228, 72, 72, 0.08);
+  border-radius: 10px;
+  padding: 12px;
+  color: #101828;
+}
+
+/* Header */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.headLeft {
+  display: grid;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  color: #101828;
+}
+
+.sub {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #101828;
+}
+
+.ratingWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reviewsCount {
+  color: #101828;
+  text-decoration: underline;
+}
+
+.dot {
+  opacity: 0.6;
+}
+
+.loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #101828;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #101828;
+  white-space: nowrap;
+}
+
+/* Gallery (Figma-like on desktop, responsive below) */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 292px);
+  gap: 16px;
+  margin: 18px 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.img {
+  width: 292px;
+  height: 312px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.noImg {
+  border: 1px solid #dadde1;
+  border-radius: 10px;
+  padding: 18px;
+  color: #6c717b;
+}
+
+/* Description */
+.description {
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #475467;
+  max-width: 1312px;
+}
+
+/* Tabs */
+.tabs {
+  margin: 0 0 24px;
+}
+
+.tabTitles {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.tabBtn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #101828;
+  cursor: pointer;
+}
+
+.tabBtn:focus-visible {
+  outline: 2px solid rgba(228, 72, 72, 0.55);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.tabActive {
+  color: #101828;
+}
+
+.tabLine {
+  position: relative;
+  margin-top: 14px;
+  height: 10px;
+}
+
+.tabLine::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4px;
+  height: 1px;
+  background: #dadde1;
+}
+
+.tabIndicator {
+  position: absolute;
+  top: 0;
+  height: 0;
+  border-top: 5px solid #e44848;
+  width: 85px;
+  transition: transform 180ms ease;
+}
+
+.indicatorLeft {
+  transform: translateX(0);
+}
+
+.indicatorRight {
+  transform: translateX(125px);
+}
+
+/* Main layout: left content + right form */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 631px 641px;
+  gap: 40px;
+  align-items: start;
+  margin-top: 12px;
+}
+
+.leftPanel {
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 44px 80px;
+}
+
+.leftCard {
+  width: 527px;
+  margin: 0 auto;
+}
+
+.rightPanel {
+  border: 1px solid #dadde1;
+  border-radius: 10px;
+  padding: 44px;
+}
+
+/* ---------- Responsive ---------- */
+
+/* <= 1400: not enough width for strict 631/641 + big paddings */
+@media (max-width: 1400px) {
+  .page {
+    padding: 24px 24px 60px;
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .leftPanel {
+    padding: 24px;
+  }
+
+  .leftCard {
+    width: 100%;
+    margin: 0;
+  }
+
+  .rightPanel {
+    padding: 24px;
+  }
+
+  /* Gallery becomes fluid grid instead of fixed 292px strip */
+  .gallery {
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    overflow-x: initial;
+  }
+
+  .img {
+    width: 100%;
+    height: 260px;
+  }
+}
+
+/* <= 1024: tighten header + images */
+@media (max-width: 1024px) {
+  .head {
+    align-items: flex-start;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+
+  .img {
+    height: 260px;
+  }
+}
+
+/* <= 768: stack header, keep readable paddings */
+@media (max-width: 768px) {
+  .page {
+    padding: 18px 16px 48px;
+  }
+
+  .head {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .tabTitles {
+    gap: 20px;
+  }
+
+  .tabBtn {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  /* On small screens indicator movement should match shorter spacing */
+  .tabIndicator {
+    width: 78px;
+  }
+
+  .indicatorRight {
+    transform: translateX(98px);
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .img {
+    height: 260px;
+  }
+}
+
+/* <= 480: compact */
+@media (max-width: 480px) {
+  .title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .sub {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .img {
+    height: 220px;
+  }
+
+  .leftPanel {
+    padding: 16px;
+  }
+
+  .rightPanel {
+    padding: 16px;
+  }
+}

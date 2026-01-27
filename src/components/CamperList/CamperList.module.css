@@ -1,0 +1,11 @@
+.list {
+  display: grid;
+  gap: 12px;
+}
+.empty {
+  border: 1px solid var(--border);
+  background: rgba(17, 24, 39, 0.55);
+  border-radius: 18px;
+  padding: 18px;
+  color: var(--muted);
+}

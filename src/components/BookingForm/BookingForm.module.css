@@ -1,0 +1,80 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 527px;
+}
+
+.h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #101828;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #6c717b;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: 0;
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 18px;
+  outline: none;
+  color: #101828;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.input:focus,
+.textarea:focus {
+  box-shadow: 0 0 0 2px rgba(228, 72, 72, 0.25);
+}
+
+.textarea {
+  resize: none;
+  min-height: 118px;
+  border-radius: 10px;
+}
+
+.err {
+  color: #e44848;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.btn {
+  width: 166px;
+  height: 56px;
+  border: 0;
+  border-radius: 200px;
+  background: #e44848;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.hint {
+  margin: 0;
+  color: #6c717b;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}

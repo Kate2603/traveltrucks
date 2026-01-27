@@ -1,0 +1,19 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+}
+.footerInner {
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.muted {
+  color: var(--muted);
+}
