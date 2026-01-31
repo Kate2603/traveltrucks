@@ -11,18 +11,18 @@ export default function NotFoundPage() {
 
       <div className={styles.page}>
         <div className={styles.card}>
-          <h2 className={styles.code}>404</h2>
-          <h3 className={styles.title}>Page not found</h3>
+          <div className={styles.code}>404</div>
+          <h2 className={styles.title}>Page not found</h2>
           <p className={styles.text}>
-            The page you’re looking for doesn’t exist or has been moved.
+            The page you’re looking for doesn’t exist or was moved.
           </p>
 
           <div className={styles.actions}>
-            <Link to="/catalog" className={styles.primary}>
+            <Link className={styles.primary} to="/catalog">
               Go to Catalog
             </Link>
-            <Link to="/" className={styles.secondary}>
-              Back to Home
+            <Link className={styles.secondary} to="/">
+              Back Home
             </Link>
           </div>
         </div>

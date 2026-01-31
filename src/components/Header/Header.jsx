@@ -14,7 +14,9 @@ export default function Header() {
           className={styles.brand}
           aria-label="TravelTrucks Home"
         >
-          <span className={styles.title}>TravelTrucks</span>
+          <span className={styles.title}>
+            Travel<span className={styles.titleAccent}>Trucks</span>
+          </span>
         </NavLink>
 
         <nav className={styles.nav} aria-label="Main navigation">
@@ -26,6 +28,8 @@ export default function Header() {
             Catalog
           </NavLink>
         </nav>
+
+        <div className={styles.rightSpacer} aria-hidden="true" />
       </div>
     </header>
   );

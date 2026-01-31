@@ -1,7 +1,6 @@
 .page {
-  max-width: 1312px;
-  margin: 0 auto;
-  padding: 24px 64px 60px;
+  width: 100%;
+  padding: 24px 0 60px;
 }
 
 .grid {
@@ -36,11 +35,30 @@
   border-radius: 200px;
   padding: 12px 24px;
   cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.loadMore:hover {
+  border-color: rgba(218, 221, 225, 0.6);
+}
+
+.loadMore:active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(228, 72, 72, 0.08);
+}
+
+.loadMore:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(228, 72, 72, 0.18);
+  outline: none;
 }
 
 .loadMore:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 @media (max-width: 1200px) {

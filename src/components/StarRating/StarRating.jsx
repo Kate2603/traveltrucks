@@ -1,3 +1,4 @@
+import { Icon } from "../../ui/icons/icons.jsx";
 import styles from "./StarRating.module.css";
 
 export default function StarRating({ value = 0, max = 5 }) {
@@ -7,8 +8,12 @@ export default function StarRating({ value = 0, max = 5 }) {
   return (
     <div className={styles.stars} aria-label={`Rating ${v} out of ${max}`}>
       {Array.from({ length: max }).map((_, i) => (
-        <span key={i} className={i < full ? styles.on : styles.off}>
-          ★
+        <span
+          key={i}
+          className={i < full ? styles.on : styles.off}
+          aria-hidden="true"
+        >
+          <Icon name="icon-star" size={16} />
         </span>
       ))}
     </div>

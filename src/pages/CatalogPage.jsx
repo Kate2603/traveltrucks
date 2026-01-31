@@ -5,6 +5,8 @@ import CatalogFilters from "../components/CatalogFilters/CatalogFilters";
 import CamperList from "../components/CamperList/CamperList";
 import Loader from "../components/Loader/Loader";
 
+import styles from "./CatalogPage.module.css";
+
 import {
   fetchCampers,
   applyFilters,
@@ -14,8 +16,6 @@ import {
   selectCampersLoading,
   selectCampersError,
 } from "../redux/campers/campersSlice";
-
-import styles from "./CatalogPage.module.css";
 
 export default function CatalogPage() {
   const dispatch = useDispatch();
@@ -37,39 +37,39 @@ export default function CatalogPage() {
   const isInitialLoading = isLoading && items.length === 0;
 
   return (
-    <section className={styles.page}>
-      <div className={styles.grid}>
-        {/* Filters */}
-        <CatalogFilters onApply={handleApply} />
+    <div className={styles.page}>
+      <div className="container">
+        <div className={styles.grid}>
+          <CatalogFilters onApply={handleApply} />
 
-        {/* Content */}
-        <div className={styles.content}>
-          {error ? (
-            <div className={styles.error}>Error: {String(error)}</div>
-          ) : null}
+          <div className={styles.content}>
+            {error ? (
+              <div className={styles.error}>Error: {String(error)}</div>
+            ) : null}
 
-          {isInitialLoading ? (
-            <Loader label="Loading campers..." />
-          ) : (
-            <>
-              <CamperList items={items} />
+            {isInitialLoading ? (
+              <Loader label="Loading campers..." />
+            ) : (
+              <>
+                <CamperList items={items} />
 
-              {hasMore ? (
                 <div className={styles.actions}>
-                  <button
-                    type="button"
-                    className={styles.loadMore}
-                    onClick={() => dispatch(loadMore())}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Loading..." : "Load more"}
-                  </button>
+                  {hasMore ? (
+                    <button
+                      className={styles.loadMore}
+                      type="button"
+                      onClick={() => dispatch(loadMore())}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Loading..." : "Load more"}
+                    </button>
+                  ) : null}
                 </div>
-              ) : null}
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

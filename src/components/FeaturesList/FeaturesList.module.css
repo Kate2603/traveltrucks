@@ -1,28 +1,151 @@
-.wrap {
-  display: grid;
-  gap: 12px;
-}
-.block {
-  border: 1px solid var(--border);
-  background: rgba(17, 24, 39, 0.55);
-  border-radius: 18px;
-  padding: 14px;
-}
-.h4 {
-  margin: 0 0 10px;
-}
-.tags {
+.card {
+  box-sizing: border-box;
+  width: 631px;
+  min-height: 588px;
+
+  background: #f7f7f7;
+  border-radius: 10px;
+
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  padding: 44px 52px;
+}
+
+.inner {
+  width: 527px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.badgesGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
+  align-content: start;
+  margin-bottom: 36px;
 }
-.tag {
-  border: 1px solid var(--border);
-  background: rgba(11, 18, 32, 0.45);
-  border-radius: 999px;
-  padding: 8px 10px;
-  font-size: 13px;
+
+.badgeCell {
+  width: 100%;
+  min-width: 0;
 }
-.muted {
-  color: var(--muted);
+
+.badgesGrid :global(a),
+.badgesGrid :global(button),
+.badgesGrid :global(div) {
+  min-width: 0;
+}
+
+.badgesGrid :global(.badge),
+.badgesGrid :global([class*="badge"]) {
+  width: 100%;
+  justify-content: center;
+}
+
+.badgesGrid :global(svg) {
+  width: 20px;
+  height: 20px;
+  color: var(--main);
+}
+
+.badgesGrid :global(svg path),
+.badgesGrid :global(svg use) {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* DETAILS */
+.details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.h4 {
+  margin: 0;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--main);
+  margin-bottom: 24px;
+}
+
+.divider {
+  width: 100%;
+  height: 0;
+  border-top: 1px solid #dadde1;
+}
+
+.list {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.left,
+.right {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--main);
+}
+
+.right {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.empty {
+  width: 100%;
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray);
+}
+
+/* Адаптив: на вузьких екранах 2 в ряд, потім 1 */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    padding: 24px 16px;
+  }
+
+  .inner {
+    width: 100%;
+    gap: 32px;
+  }
+
+  .badgesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .badgesGrid {
+    grid-template-columns: 1fr;
+  }
 }

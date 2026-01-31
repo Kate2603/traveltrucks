@@ -53,6 +53,10 @@ Endpoints:
 - Loader на асинхронних запитах
 - Оформлений `head` (title), без помилок в консолі
 
+Архітектурний статус
+
+API → EQUIPMENT → matcher → filters / badges / features
+
 ## Local setup
 
 1. Install dependencies:

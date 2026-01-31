@@ -1,45 +1,43 @@
 .page {
   max-width: 1312px;
   margin: 0 auto;
-  padding: 40px 64px 80px;
-  color: #101828;
+  padding: 64px 24px;
 }
 
 .card {
   border: 1px solid #dadde1;
   border-radius: 16px;
   background: #ffffff;
-  padding: 28px;
-  display: grid;
-  gap: 12px;
+  padding: 32px;
+  text-align: center;
 }
 
 .code {
   font-size: 56px;
   line-height: 1;
   font-weight: 800;
-  margin: 0;
-  color: #101828;
+  color: #e44848;
+  margin-bottom: 10px;
 }
 
 .title {
-  margin: 0;
-  font-size: 20px;
-  line-height: 24px;
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 32px;
   font-weight: 600;
   color: #101828;
 }
 
 .text {
-  margin: 0;
+  margin: 0 0 22px;
+  color: #475467;
   font-size: 16px;
   line-height: 24px;
-  color: #475467;
 }
 
 .actions {
-  margin-top: 8px;
   display: flex;
+  justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
 }
@@ -48,34 +46,32 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
-  border-radius: 200px;
   border: 0;
-  text-decoration: none;
+  border-radius: 200px;
+  padding: 12px 22px;
   background: #e44848;
   color: #ffffff;
   font-weight: 600;
+  text-decoration: none;
+}
+
+.primary:hover {
+  filter: brightness(0.95);
 }
 
 .secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
-  border-radius: 200px;
   border: 1px solid #dadde1;
-  text-decoration: none;
-  background: #f7f7f7;
+  border-radius: 200px;
+  padding: 12px 22px;
+  background: #ffffff;
   color: #101828;
   font-weight: 600;
+  text-decoration: none;
 }
 
-@media (max-width: 900px) {
-  .page {
-    padding: 28px 16px 60px;
-  }
-
-  .code {
-    font-size: 44px;
-  }
+.secondary:hover {
+  background: #f2f4f7;
 }

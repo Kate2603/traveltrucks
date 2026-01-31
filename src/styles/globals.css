@@ -1,3 +1,8 @@
+/* =========================
+   Google Font (Figma: Inter)
+   ========================= */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 :root {
   /* ===== UI KIT COLORS ===== */
   --white: #ffffff;
@@ -5,16 +10,14 @@
   /* Main text colors */
   --main: #101828; /* Main */
   --text: #475467; /* Text */
-  --gray: #6c717b; /* Gray */
-  --gray-light: #dadde1; /* Gray light */
-
-  /* Surfaces */
+  --muted: #6c717b; /* Muted/Gray */
+  --border: #dadde1; /* Border */
   --inputs: #f7f7f7; /* Inputs */
   --badges: #f2f4f7; /* Badges */
 
   /* Accent (buttons) */
-  --accent: #e44848; /* Button */
-  --accent-hover: #d84343; /* Button Hover */
+  --accent: #e44848;
+  --accent-hover: #d84343;
 
   /* Rating */
   --rating: #ffc531;
@@ -27,17 +30,19 @@
 
   /* ===== TYPOGRAPHY ===== */
   --font-main:
-    Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
     "Apple Color Emoji", "Segoe UI Emoji";
 
   /* ===== LAYOUT ===== */
   --container: 1440px;
-
-  /* Responsive gutters */
   --gutter: 64px;
+
+  /* Heights */
+  --header-h: 72px;
+  --footer-h: 57px;
 }
 
-/* Base reset */
+/* ===== Base reset ===== */
 * {
   box-sizing: border-box;
 }
@@ -75,13 +80,15 @@ textarea {
   width: 100%;
 }
 
-/* Divider (як у макеті header border / light lines) */
+/* Divider */
 .hr {
   height: 1px;
   background: var(--badges);
   border: 0;
   margin: 16px 0;
 }
+
+/* ===== Responsive gutters ===== */
 
 /* Tablet */
 @media (max-width: 768px) {

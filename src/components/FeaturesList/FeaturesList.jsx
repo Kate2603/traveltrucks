@@ -1,72 +1,93 @@
+import Badge from "../../ui/Badge/Badge.jsx";
 import styles from "./FeaturesList.module.css";
 
-const FEATURE_KEYS = [
-  "transmission",
-  "engine",
-  "AC",
-  "bathroom",
-  "kitchen",
-  "TV",
-  "radio",
-  "refrigerator",
-  "microwave",
-  "gas",
-  "water",
-];
+import { EQUIPMENT, DETAILS } from "../../constants/ui.js";
+import { pickMatchedItems, itemKey } from "../../utils/matchers.js";
 
-const DETAIL_KEYS = [
-  "form",
-  "length",
-  "width",
-  "height",
-  "tank",
-  "consumption",
-];
+function startCaseFromCamelOrKebab(value) {
+  const s = String(value ?? "").trim();
+  if (!s) return "";
 
-function isPresent(val) {
-  if (val === true) return true;
-  if (val === 1) return true;
-  if (val === "true") return true;
-  if (typeof val === "string" && val.trim().length > 0) return true;
-  if (typeof val === "number" && !Number.isNaN(val)) return true;
-  return false;
+  const spaced = s
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .trim();
+
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+}
+
+function formatDetailValue(key, raw) {
+  if (raw === null || raw === undefined) return "";
+  const asString = String(raw).trim();
+  if (!asString) return "";
+
+  if (key === "form") return startCaseFromCamelOrKebab(asString);
+
+  if (key === "length" || key === "width" || key === "height") {
+    const num = Number(raw);
+    if (!Number.isNaN(num)) return `${num} m`;
+    return asString;
+  }
+
+  if (key === "tank") {
+    const num = Number(raw);
+    if (!Number.isNaN(num)) return `${num} l`;
+    return asString;
+  }
+
+  if (key === "consumption") {
+    const num = Number(raw);
+    if (!Number.isNaN(num)) return `${num}/100km`;
+    return asString;
+  }
+
+  return asString;
 }
 
 export default function FeaturesList({ camper }) {
-  const features = FEATURE_KEYS.filter((k) => isPresent(camper?.[k]));
-  const details = DETAIL_KEYS.filter((k) => isPresent(camper?.[k]));
+  const equipment = pickMatchedItems(camper, EQUIPMENT);
+
+  const detailRows = DETAILS.map((d) => {
+    const raw = camper?.[d.key];
+    const value = formatDetailValue(d.key, raw);
+    return { ...d, value };
+  }).filter((r) => r.value && String(r.value).trim().length > 0);
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.block}>
-        <h4 className={styles.h4}>Features</h4>
-        <div className={styles.tags}>
-          {features.length ? (
-            features.map((k) => (
-              <span key={k} className={styles.tag}>
-                {k}: {String(camper[k]) === "true" ? "Yes" : String(camper[k])}
-              </span>
+    <section className={styles.card} aria-label="Features">
+      <div className={styles.inner}>
+        {/* EQUIPMENT */}
+        <div className={styles.badgesGrid} aria-label="Equipment">
+          {equipment.length ? (
+            equipment.map((it) => (
+              <div className={styles.badgeCell} key={itemKey(it)}>
+                <Badge iconName={it.iconName} label={it.label} />
+              </div>
             ))
           ) : (
-            <span className={styles.muted}>No features info.</span>
+            <div className={styles.empty}>No features info.</div>
           )}
         </div>
-      </div>
 
-      <div className={styles.block}>
-        <h4 className={styles.h4}>Details</h4>
-        <div className={styles.tags}>
-          {details.length ? (
-            details.map((k) => (
-              <span key={k} className={styles.tag}>
-                {k}: {String(camper[k])}
-              </span>
-            ))
+        {/* DETAILS */}
+        <div className={styles.details} aria-label="Vehicle details">
+          <h4 className={styles.h4}>Vehicle details</h4>
+          <div className={styles.divider} />
+
+          {detailRows.length ? (
+            <ul className={styles.list}>
+              {detailRows.map((row) => (
+                <li className={styles.row} key={row.key}>
+                  <span className={styles.left}>{row.label}</span>
+                  <span className={styles.right}>{row.value}</span>
+                </li>
+              ))}
+            </ul>
           ) : (
-            <span className={styles.muted}>No details info.</span>
+            <div className={styles.empty}>No details info.</div>
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

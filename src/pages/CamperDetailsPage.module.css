@@ -1,7 +1,6 @@
 .page {
-  max-width: 1312px;
-  margin: 0 auto;
-  padding: 24px 64px 60px;
+  width: 100%;
+  padding: 24px 0 60px;
   background: #ffffff;
   color: #101828;
 }
@@ -38,8 +37,9 @@
   margin-bottom: 18px;
 }
 
-.headLeft {
-  display: grid;
+.headMain {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
@@ -51,35 +51,56 @@
   color: #101828;
 }
 
-.sub {
+/* Row: rating + location */
+.metaRow {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #101828;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.ratingWrap {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.reviewsCount {
-  color: #101828;
-  text-decoration: underline;
-}
-
-.dot {
-  opacity: 0.6;
-}
-
-.loc {
+/* Rating (one star + text) */
+.rating {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #101828;
 }
 
+.star {
+  color: #ffc531;
+  display: inline-flex;
+  line-height: 0;
+}
+
+.ratingText {
+  color: #101828;
+  text-decoration: underline;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/* Location with map icon */
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.map {
+  color: #101828;
+  display: inline-flex;
+  line-height: 0;
+}
+
+.locationText {
+  color: #101828;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/* Price on the next line */
 .price {
   font-weight: 600;
   font-size: 24px;
@@ -88,22 +109,25 @@
   white-space: nowrap;
 }
 
-/* Gallery (Figma-like on desktop, responsive below) */
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 292px);
   gap: 16px;
   margin: 18px 0;
-  overflow-x: auto;
-  padding-bottom: 2px;
+
+  overflow: hidden;
 }
 
 .img {
   width: 292px;
   height: 312px;
+  margin: 0 auto;
+
   object-fit: cover;
   border-radius: 10px;
+
   display: block;
+  flex: none;
 }
 
 .noImg {
@@ -187,7 +211,7 @@
   transform: translateX(125px);
 }
 
-/* Main layout: left content + right form */
+/* Main layout */
 .contentGrid {
   display: grid;
   grid-template-columns: 631px 641px;
@@ -196,26 +220,42 @@
   margin-top: 12px;
 }
 
+/* LEFT (Features) */
 .leftPanel {
-  background: #f7f7f7;
-  border-radius: 10px;
-  padding: 44px 80px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
+/* було: .leftCard { width: 527px; margin... } */
 .leftCard {
-  width: 527px;
-  margin: 0 auto;
+  width: 631px;
+  margin: 0;
+}
+/* LEFT (Reviews) */
+.leftPanelReviews {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
 }
 
+.leftCardReviews {
+  width: 631px;
+  margin: 0;
+}
+
+/* RIGHT form */
 .rightPanel {
   border: 1px solid #dadde1;
   border-radius: 10px;
   padding: 44px;
 }
 
-/* ---------- Responsive ---------- */
-
-/* <= 1400: not enough width for strict 631/641 + big paddings */
+/* Responsive */
 @media (max-width: 1400px) {
   .page {
     padding: 24px 24px 60px;
@@ -235,14 +275,17 @@
     margin: 0;
   }
 
+  .leftCardReviews {
+    width: 100%;
+  }
+
   .rightPanel {
     padding: 24px;
   }
 
-  /* Gallery becomes fluid grid instead of fixed 292px strip */
+  /* Вузькі екрани: робимо сітку адаптивною */
   .gallery {
-    grid-template-columns: repeat(4, minmax(220px, 1fr));
-    overflow-x: initial;
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
   }
 
   .img {
@@ -251,12 +294,7 @@
   }
 }
 
-/* <= 1024: tighten header + images */
 @media (max-width: 1024px) {
-  .head {
-    align-items: flex-start;
-  }
-
   .gallery {
     grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
@@ -266,20 +304,9 @@
   }
 }
 
-/* <= 768: stack header, keep readable paddings */
 @media (max-width: 768px) {
   .page {
     padding: 18px 16px 48px;
-  }
-
-  .head {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .price {
-    font-size: 22px;
-    line-height: 28px;
   }
 
   .tabTitles {
@@ -291,7 +318,6 @@
     line-height: 22px;
   }
 
-  /* On small screens indicator movement should match shorter spacing */
   .tabIndicator {
     width: 78px;
   }
@@ -302,23 +328,6 @@
 
   .gallery {
     grid-template-columns: 1fr;
-  }
-
-  .img {
-    height: 260px;
-  }
-}
-
-/* <= 480: compact */
-@media (max-width: 480px) {
-  .title {
-    font-size: 22px;
-    line-height: 28px;
-  }
-
-  .sub {
-    flex-wrap: wrap;
-    row-gap: 8px;
   }
 
   .img {

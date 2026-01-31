@@ -1,21 +1,25 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  createSelector,
+} from "@reduxjs/toolkit";
 import { apiGetCamperById, apiGetCampers } from "../../api/campersApi";
 
 function applyClientFiltering(items, filters) {
-  const loc = (filters.location || "").trim().toLowerCase();
-  const bodyType = (filters.bodyType || "").trim().toLowerCase();
-  const features = filters.features || {};
+  const loc = (filters?.location || "").trim().toLowerCase();
+  const bodyType = (filters?.bodyType || "").trim().toLowerCase();
+  const features = filters?.features || {};
 
   return items.filter((c) => {
     // location: частковий збіг
     if (loc) {
-      const cLoc = String(c.location || "").toLowerCase();
+      const cLoc = String(c?.location || "").toLowerCase();
       if (!cLoc.includes(loc)) return false;
     }
 
     // bodyType: точний збіг по form
     if (bodyType) {
-      const form = String(c.form || "").toLowerCase();
+      const form = String(c?.form || "").toLowerCase();
       if (form !== bodyType) return false;
     }
 
@@ -23,7 +27,7 @@ function applyClientFiltering(items, filters) {
     for (const key of Object.keys(features)) {
       if (!features[key]) continue;
 
-      const val = c[key];
+      const val = c?.[key];
 
       const ok =
         val === true ||
@@ -31,7 +35,7 @@ function applyClientFiltering(items, filters) {
         val === 1 ||
         val === "1" ||
         (typeof val === "string" && val.trim().length > 0) ||
-        (typeof val === "number" && !Number.isNaN(val));
+        (typeof val === "number" && Number.isFinite(val));
 
       if (!ok) return false;
     }
@@ -40,19 +44,18 @@ function applyClientFiltering(items, filters) {
   });
 }
 
-// забираємо ВСЕ один раз
+// Забираємо все один раз (клієнтська фільтрація)
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
   async () => {
     const data = await apiGetCampers({
       page: 1,
       limit: 1000,
-      serverParams: {}, // фільтри робимо на клієнті стабільно
+      serverParams: {},
     });
 
     if (Array.isArray(data)) return data;
     if (data && Array.isArray(data.items)) return data.items;
-
     return [];
   },
 );
@@ -84,7 +87,7 @@ const campersSlice = createSlice({
   initialState,
   reducers: {
     applyFilters(state, action) {
-      const filters = action.payload;
+      const filters = action.payload || {};
       state.filteredItems = applyClientFiltering(state.allItems, filters);
       state.visibleCount = state.step;
     },
@@ -98,12 +101,14 @@ const campersSlice = createSlice({
       state.visibleCount = state.step;
     },
     setStep(state, action) {
-      state.step = action.payload;
-      state.visibleCount = action.payload;
+      const step = Number(action.payload) || 4;
+      state.step = step;
+      state.visibleCount = step;
     },
   },
   extraReducers: (builder) => {
     builder
+      // fetchCampers
       .addCase(fetchCampers.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -117,9 +122,9 @@ const campersSlice = createSlice({
       .addCase(fetchCampers.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error?.message || "Failed to load campers";
-      });
+      })
 
-    builder
+      // fetchCamperById
       .addCase(fetchCamperById.pending, (state) => {
         state.currentLoading = true;
         state.currentError = null;
@@ -141,12 +146,58 @@ export const { applyFilters, loadMore, resetVisible, setStep } =
 
 export default campersSlice.reducer;
 
-// селектори
-export const selectCampersLoading = (s) => s.campers.isLoading;
-export const selectCampersError = (s) => s.campers.error;
-export const selectFilteredCampers = (s) => s.campers.filteredItems;
-export const selectVisibleCount = (s) => s.campers.visibleCount;
-export const selectVisibleCampers = (s) =>
-  s.campers.filteredItems.slice(0, s.campers.visibleCount);
-export const selectHasMore = (s) =>
-  s.campers.visibleCount < s.campers.filteredItems.length;
+/* =========================
+   Memoized selectors (RTK)
+   ========================= */
+
+export const selectCampersState = (s) => s.campers;
+
+export const selectCampersLoading = createSelector(
+  [selectCampersState],
+  (c) => c.isLoading,
+);
+
+export const selectCampersError = createSelector(
+  [selectCampersState],
+  (c) => c.error,
+);
+
+export const selectAllCampers = createSelector(
+  [selectCampersState],
+  (c) => c.allItems,
+);
+
+export const selectFilteredCampers = createSelector(
+  [selectCampersState],
+  (c) => c.filteredItems,
+);
+
+export const selectVisibleCount = createSelector(
+  [selectCampersState],
+  (c) => c.visibleCount,
+);
+
+export const selectVisibleCampers = createSelector(
+  [selectFilteredCampers, selectVisibleCount],
+  (items, count) => items.slice(0, count),
+);
+
+export const selectHasMore = createSelector(
+  [selectFilteredCampers, selectVisibleCount],
+  (items, count) => count < items.length,
+);
+
+export const selectCurrentCamper = createSelector(
+  [selectCampersState],
+  (c) => c.current,
+);
+
+export const selectCurrentLoading = createSelector(
+  [selectCampersState],
+  (c) => c.currentLoading,
+);
+
+export const selectCurrentError = createSelector(
+  [selectCampersState],
+  (c) => c.currentError,
+);

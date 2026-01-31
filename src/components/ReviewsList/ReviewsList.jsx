@@ -6,9 +6,11 @@ function getInitial(name) {
   return s ? s[0].toUpperCase() : "A";
 }
 
-export default function ReviewsList({ reviews = [] }) {
+export default function ReviewsList(props) {
+  const reviews = props.reviews || [];
+
   if (!Array.isArray(reviews) || reviews.length === 0) {
-    return <div className={styles.empty}>Пока нет отзывов.</div>;
+    return <div className={styles.empty}>Поки немає відгуків.</div>;
   }
 
   return (
@@ -21,12 +23,11 @@ export default function ReviewsList({ reviews = [] }) {
         return (
           <div key={`${name}-${idx}`} className={styles.item}>
             <div className={styles.top}>
-              <div className={styles.left}>
-                <div className={styles.avatar}>{getInitial(name)}</div>
-                <div className={styles.nameWrap}>
-                  <div className={styles.name}>{name}</div>
-                  <StarRating value={rating} />
-                </div>
+              <div className={styles.avatar}>{getInitial(name)}</div>
+
+              <div className={styles.meta}>
+                <div className={styles.name}>{name}</div>
+                <StarRating value={rating} />
               </div>
             </div>
 
